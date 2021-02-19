@@ -12,126 +12,150 @@ class SignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext mainContext) {
-    return MaterialApp(
-      home: Form(
-        key: _formKey,
-        child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0.0,
-          ),
-          body: ChangeNotifierProvider<MyProvider>(
-            create: (context) => MyProvider(),
-            child: Consumer<MyProvider>(builder: (context, provider, child) {
-              return ListView(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      FlatButton(
-                        onPressed: (){
-
-                        },
-                        child: Text(
-                          'SignUp',
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                        color: Colors.transparent,
-                      ),
-                      FlatButton(
-                        onPressed: () {
-                          Navigator.pop(mainContext);
-                        },
-                        child: Text(
-                          'Login',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.black,
-                          ),
-                        ),
-                        color: Colors.transparent,
-                      ),
-                    ],
-                  ),
-                  MyImage(),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.transparent,
-                    ),
-                    margin: EdgeInsets.all(30),
-                    padding: EdgeInsets.all(30),
-                    child: Column(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: Container(
+          constraints:
+              BoxConstraints(minHeight: MediaQuery.of(mainContext).size.height),
+          child: Form(
+            key: _formKey,
+            child: ChangeNotifierProvider<MyProvider>(
+              create: (context) => MyProvider(),
+              child: Consumer<MyProvider>(builder: (context, provider, child) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        TextFormField(
-                          decoration: InputDecoration(
-                            labelText: 'email address',
-                            hintText: AutofillHints.email,
+                        Text(
+                          'Sign Up',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30,
+                            color: Colors.black,
                           ),
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return 'Please enter email';
-                            }
-                            return null;
+                        ),
+                        FlatButton(
+                          onPressed: () {
+                            Navigator.pop(mainContext);
                           },
-                        ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            labelText: 'username',
-                            hintText: AutofillHints.username,
-                          ),
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return 'Please enter username';
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        MyPassword(password: 'Password'),
-                        MyPassword(password: 'Confirm Password'),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        MaterialButton(
                           child: Text(
-                            'SIGN UP',
+                            'Login',
                             style: TextStyle(
                               fontSize: 20,
-                              color: Colors.indigo,
+                              color: Color(0xff999999),
                             ),
                           ),
-                          minWidth: 200,
-                          height: 50,
-                          elevation: 16,
-                          color: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                          onPressed: () {
-                            if (_formKey.currentState.validate()) {
-                              Navigator.pop(context);
-                            }
-                          },
+                          color: Colors.transparent,
                         ),
-                        SizedBox(
-                          height: 25,
-                        ),
-                        Text('Terms of service'),
                       ],
                     ),
-                  ),
-                ],
-              );
-            }),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        MyImage(),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 32,
+                            vertical: 6,
+                          ),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              labelText: 'email address',
+                              hintText: AutofillHints.email,
+                            ),
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'Please enter email';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 32,
+                            vertical: 6,
+                          ),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              labelText: 'username',
+                              hintText: AutofillHints.username,
+                            ),
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'Please enter username';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 32,
+                              vertical: 6,
+                            ),
+                            child: MyPassword(password: 'Password')),
+                        Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 32,
+                              vertical: 6,
+                            ),
+                            child: MyPassword(password: 'Confirm Password')),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 32,
+                            vertical: 6,
+                          ),
+                          child: MaterialButton(
+                            elevation: 6,
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.check,
+                                ),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                Text(
+                                  'SIGN UP',
+                                ),
+                              ],
+                            ),
+                            textColor: Colors.indigoAccent,
+                            onPressed: () {
+                              if (_formKey.currentState.validate()) {
+                                Navigator.pop(context);
+                              }
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Text(
+                          'Terms of service',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Color(0xff999999),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                );
+              }),
+            ),
           ),
         ),
       ),

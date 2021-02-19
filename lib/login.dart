@@ -116,7 +116,9 @@ class Login extends StatelessWidget {
                               ],
                             ),
                             onPressed: (){
-
+                               if (_formKey.currentState.validate()) {
+                              Navigator.pop(context);
+                              }
                             },
                             textColor: Colors.indigoAccent,
                           ),
