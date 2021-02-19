@@ -18,7 +18,7 @@ class MyPassword extends StatelessWidget {
         return TextFormField(
           obscureText: provider.hidePwd,
           decoration: InputDecoration(
-       //       labelText: widget.password,
+             labelText: password,
               hintText: AutofillHints.password,
               suffixIcon: IconButton(
                 icon: Builder(

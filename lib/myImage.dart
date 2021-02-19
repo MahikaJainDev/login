@@ -11,40 +11,40 @@ class MyImage extends StatelessWidget {
       create: (context) => MyImageProvider(),
       child: Consumer<MyImageProvider>(
         builder: (providerContext, provider, child) {
-          return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (provider.image == null)
-                  IconButton(
-                      icon: Icon(
-                        Icons.person_pin,
-                        size: 100,
-                      ),
-                      onPressed: () async {
-                        showImagePickerDialog(providerContext,
-                            imageFile: provider.image, onChange: (file) {
-                          Navigator.of(context).pop();
-                          provider.setImage(file);
-                        });
-                      }),
-                if (provider.image != null)
-                  Container(
-                    height: 80,
-                    width: 80,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Colors.black45,
-                        width: 3,
-                      ),
-                      image: DecorationImage(
-                        image: FileImage(provider.image),
-                      ),
-                    ),
-                    //  child: Image.file(provider.image),
-                  ),
-              ],
-          //  ),
+          if(provider.image==null)
+            return GestureDetector(
+              onTap: (){
+                print('clicked');
+                showImagePickerDialog(
+                  context,
+                  imageFile: provider.image,
+                  onChange: (file) {
+                    Navigator.of(context).pop();
+                    provider.setImage(file);
+                  }
+                );
+              },
+              child: Icon(
+                Icons.person_pin,
+                size: 100,
+                color: Color(0xff999999),
+              ),
+            );
+
+          return Container(
+            height: 80,
+            width: 80,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: Colors.black45,
+                width: 3,
+              ),
+              image: DecorationImage(
+                image: FileImage(provider.image),
+              ),
+            ),
+            //  child: Image.file(provider.image),
           );
         },
       ),

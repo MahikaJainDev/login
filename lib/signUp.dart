@@ -11,7 +11,7 @@ class SignUp extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext mainContext) {
     return MaterialApp(
       home: Form(
         key: _formKey,
@@ -44,7 +44,7 @@ class SignUp extends StatelessWidget {
                       ),
                       FlatButton(
                         onPressed: () {
-                          Navigator.pop(context);
+                          Navigator.pop(mainContext);
                         },
                         child: Text(
                           'Login',
